@@ -41,15 +41,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private var creator: Boolean = true
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
-            Log.e("KaKao Login | CallBack", "로그인 실패 $error")
             Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
         } else if (token != null) {
-            Log.e("KaKao Login | CallBack", "로그인 성공 ${token.accessToken}")
             showLoadingDialog(this)
             getKakaoUserData()
         }
     }
-
 
     override fun init() {
         checkPermission()
