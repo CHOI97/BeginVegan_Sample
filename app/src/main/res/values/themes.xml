@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Beginvegan" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/color_primary2</item>
+
+    </style>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+<!--        <item name="windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/test_home_re3</item>-->
+<!--        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/splash_logo</item>-->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/color_white</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="s">@color/color_white</item>
+        <item name="postSplashScreenTheme">@style/Theme.Beginvegan</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize8Percent" parent="">
+        <item name="cornerSize">8dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize12Percent" parent="">
+        <item name="cornerSize">12dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize20Percent" parent="">
+        <item name="cornerSize">20dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="tabProfileTextSize" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/text_16</item>
+        <item name="fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="CounterTextAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+    <style name="textInputEditTextStyle" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlNormal">@color/color_text_32</item>
+        <item name="boxStrokeColor">@color/color_primary3</item>
+        <item name="android:textCursorDrawable">@color/color_primary3</item>
+    </style>
+
+    <style name = "CustomVeganTypeChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="android:backgroundTint">@color/chip_state_color_background</item>
+        <item name="chipStrokeColor">@color/color_primary3</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/chip_state_color_text</item>
+        <item name="rippleColor">@color/color_primary2</item>
+    </style>
+
+</resources>
