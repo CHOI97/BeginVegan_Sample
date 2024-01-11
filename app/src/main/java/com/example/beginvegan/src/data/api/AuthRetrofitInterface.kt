@@ -6,6 +6,7 @@ import com.example.beginvegan.src.data.model.auth.AuthSignResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignOutResponse
 import com.example.beginvegan.src.data.model.auth.AuthTokenResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -15,21 +16,21 @@ interface AuthRetrofitInterface {
     @POST("/auth/sign-in")
     suspend fun postAuthSignIn(
         @Body auth:AuthLogin
-    ): Call<AuthSignResponse>
+    ): Response<AuthSignResponse>
     @POST("/auth/sign-up")
     suspend fun postAuthSignUp(
         @Body auth: KaKaoAuth
-    ): Call<AuthSignResponse>
+    ): Response<AuthSignResponse>
 
     // 유저 로그아웃
     @POST("/auth/sign-out")
     suspend fun postAuthSignOut(
         @Header("Authorization") accessToken: String?,
-    ): Call<AuthSignOutResponse>
+    ): Response<AuthSignOutResponse>
 
     // 토큰갱신
     @POST("/auth/refresh")
     suspend fun postTokenRefresh(
         @Body refreshToken :String
-    ): Call<AuthTokenResponse>
+    ): Response<AuthTokenResponse>
 }

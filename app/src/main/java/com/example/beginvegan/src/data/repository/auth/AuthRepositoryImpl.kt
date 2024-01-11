@@ -11,13 +11,15 @@ import com.example.beginvegan.src.data.model.auth.AuthTokenResponse
 import com.example.beginvegan.src.data.model.auth.KaKaoAuth
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import retrofit2.Response
 import retrofit2.awaitResponse
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class AuthRepositoryImpl() : AuthRepository {
-    private val authRetrofitInterface: AuthRetrofitInterface = ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
+    private val authRetrofitInterface: AuthRetrofitInterface =
+        ApplicationClass.sRetrofit.create(AuthRetrofitInterface::class.java)
 
     override suspend fun loginWithKaKaoAccount(context: Context): Result<OAuthToken> {
         return try {
@@ -35,8 +37,9 @@ class AuthRepositoryImpl() : AuthRepository {
             Result.failure(e)
         }
     }
+
     override suspend fun getKaKaoUserData(): KaKaoAuth? {
-        return suspendCoroutine {continuation ->
+        return suspendCoroutine { continuation ->
             UserApiClient.instance.me { user, error ->
                 if (error != null) {
                     Log.e("KaKao User", "사용자 정보 요청 실패", error)
@@ -61,20 +64,20 @@ class AuthRepositoryImpl() : AuthRepository {
         }
     }
 
-    override suspend fun signIn(authLogin: AuthLogin): AuthSignResponse {
-        return authRetrofitInterface.postAuthSignIn(authLogin).awaitResponse().body()!!
+    override suspend fun signIn(authLogin: AuthLogin): Response<AuthSignResponse> {
+        return authRetrofitInterface.postAuthSignIn(authLogin)
     }
 
-    override suspend fun signUp(kakaoAuth: KaKaoAuth): AuthSignResponse {
-        return authRetrofitInterface.postAuthSignUp(kakaoAuth).awaitResponse().body()!!
+    override suspend fun signUp(kakaoAuth: KaKaoAuth): Response<AuthSignResponse> {
+        return authRetrofitInterface.postAuthSignUp(kakaoAuth)
     }
 
-    override suspend fun signOut(accessToken: String): AuthSignOutResponse {
-        return authRetrofitInterface.postAuthSignOut(accessToken).awaitResponse().body()!!
+    override suspend fun signOut(accessToken: String): Response<AuthSignOutResponse> {
+        return authRetrofitInterface.postAuthSignOut(accessToken)
     }
 
-    override suspend fun refreshToken(refreshToken: String): AuthTokenResponse {
-        return authRetrofitInterface.postTokenRefresh(refreshToken).awaitResponse().body()!!
+    override suspend fun refreshToken(refreshToken: String): Response<AuthTokenResponse> {
+        return authRetrofitInterface.postTokenRefresh(refreshToken)
     }
 
 }

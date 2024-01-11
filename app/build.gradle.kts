@@ -50,7 +50,8 @@ dependencies {
     // Fragment viewModels()
     implementation ("androidx.activity:activity-ktx:1.5.5")
     implementation ("androidx.fragment:fragment-ktx:1.5.5")
-
+    // Timber
+    implementation ("com.jakewharton.timber:timber:4.7.1")
     // Retrofit2
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -83,4 +84,5 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     // CircleIndicator
     implementation ("me.relex:circleindicator:1.3.2")
+
 }

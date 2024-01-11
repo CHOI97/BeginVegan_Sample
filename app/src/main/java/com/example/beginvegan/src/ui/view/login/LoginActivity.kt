@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         binding.btnLoginKakao.setOnClickListener {
             loginViewModel.loginWithKaKao(this)
         }
-        loginViewModel.kakaoAuthResult
+
     }
 
     private fun checkPermission() {

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beginvegan.src.data.model.auth.AuthLogin
 import com.example.beginvegan.src.data.model.auth.KaKaoAuth
 import com.example.beginvegan.src.data.repository.auth.AuthRepository
 import com.example.beginvegan.src.data.repository.auth.AuthRepositoryImpl
@@ -13,6 +14,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class LoginViewModel(private val authRepository: AuthRepository): ViewModel() {
     /*
@@ -31,23 +33,41 @@ class LoginViewModel(private val authRepository: AuthRepository): ViewModel() {
         -> AccessToken에 대한 LiveData를 가지고 있자
 
      */
-    lateinit var kakaoAuthResult: MutableLiveData<KaKaoAuth>
 
+    private var kakaoAuthResult= MutableLiveData<KaKaoAuth>()
     // 카카오 SDK 토큰 갱신을 위한 MutableLiveData
-    private var _kakaoAuthToken: MutableLiveData<Result<OAuthToken>> = MutableLiveData<Result<OAuthToken>>()
+    private var kakaoAuthToken = MutableLiveData<Result<OAuthToken>>()
+    private var _kakaoAccessToken = MutableLiveData<String>()
+    val kakaoAccessToken: LiveData<String> get() = _kakaoAccessToken
 
-    lateinit var kakaoAccessToken: MutableLiveData<String>
+    private lateinit var authLogin: AuthLogin
 
     fun loginWithKaKao(context: Context) = viewModelScope.launch(Dispatchers.IO){
         try{
-            val token = authRepository.loginWithKaKaoAccount(context)
-            _kakaoAuthToken.postValue(token)
+            kakaoAuthToken.postValue(authRepository.loginWithKaKaoAccount(context))
             getKaKaoUserData()
         }catch (e: Exception){
-            Log.e("loginWithKaKao",e.toString())
+            Timber.e(e.toString())
         }
     }
-    private fun getKaKaoUserData() {
-
+    private fun getKaKaoUserData() = viewModelScope.launch (Dispatchers.IO){
+        try{
+            kakaoAuthResult.postValue(authRepository.getKaKaoUserData())
+            signIn()
+        }catch(e:Exception){
+            Timber.d("getKaKaoUserData error: $e")
+        }
+    }
+    private fun signIn() = viewModelScope.launch (Dispatchers.IO){
+        authLogin = AuthLogin(kakaoAuthResult.value!!.providerId,kakaoAuthResult.value!!.email)
+        val response = authRepository.signIn(authLogin)
+        if(response.isSuccessful){
+            response.body().let{
+                _kakaoAccessToken.postValue(it?.information?.accessToken)
+                Timber.d("SIGN IN SUCCESS")
+            }
+        }else{
+            Timber.d("SIGN IN ERROR: ${response.code()}")
+        }
     }
 }
