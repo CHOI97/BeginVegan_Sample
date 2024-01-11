@@ -12,7 +12,6 @@ import android.widget.Toast
 import com.example.beginvegan.databinding.DialogLogoutBinding
 import com.example.beginvegan.src.data.model.auth.AuthSignOutInterface
 import com.example.beginvegan.src.data.model.auth.AuthSignOutResponse
-import com.example.beginvegan.src.data.model.auth.AuthSignOutService
 import com.example.beginvegan.src.ui.view.login.LoginActivity
 
 class LogoutDialog(context: Context): Dialog(context), AuthSignOutInterface{
@@ -32,7 +31,7 @@ class LogoutDialog(context: Context): Dialog(context), AuthSignOutInterface{
 
         binding.btnLogout.setOnClickListener {
             //로그아웃
-            AuthSignOutService(this).tryPostAuthSignOut()
+//            AuthSignOutService(this).tryPostAuthSignOut()
         }
         binding.btnBack.setOnClickListener {
             //돌아가기

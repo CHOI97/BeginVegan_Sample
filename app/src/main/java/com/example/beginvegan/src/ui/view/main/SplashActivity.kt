@@ -16,7 +16,6 @@ import com.example.beginvegan.R
 import com.example.beginvegan.config.ApplicationClass
 import com.example.beginvegan.src.data.model.auth.AuthSignInterface
 import com.example.beginvegan.src.data.model.auth.AuthSignResponse
-import com.example.beginvegan.src.data.model.auth.AuthSignService
 import com.example.beginvegan.src.ui.view.login.LoginActivity
 import com.example.beginvegan.util.Constants.ACCESS_TOKEN
 import com.example.beginvegan.util.Constants.PROVIDER_ID
@@ -42,7 +41,7 @@ class SplashActivity : AppCompatActivity(), AuthSignInterface {
             splashScreen.setKeepOnScreenCondition{true}
         }
         if(isAutoLogin){
-            AuthSignService(this).tryPostAuthSignIn(mProviderID!!,mEmail!!)
+//            AuthSignService(this).tryPostAuthSignIn(mProviderID!!,mEmail!!)
         }else{
             delayForSplashScreen { moveToLogin() }
         }

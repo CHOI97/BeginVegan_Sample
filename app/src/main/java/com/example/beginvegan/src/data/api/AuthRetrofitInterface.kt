@@ -1,9 +1,8 @@
 package com.example.beginvegan.src.data.api
 
-import com.example.beginvegan.src.data.model.auth.KakaoAuth
+import com.example.beginvegan.src.data.model.auth.KaKaoAuth
 import com.example.beginvegan.src.data.model.auth.AuthLogin
 import com.example.beginvegan.src.data.model.auth.AuthSignResponse
-import com.example.beginvegan.src.data.model.auth.AuthResponse
 import com.example.beginvegan.src.data.model.auth.AuthSignOutResponse
 import com.example.beginvegan.src.data.model.auth.AuthTokenResponse
 import retrofit2.Call
@@ -19,7 +18,7 @@ interface AuthRetrofitInterface {
     ): Call<AuthSignResponse>
     @POST("/auth/sign-up")
     suspend fun postAuthSignUp(
-        @Body auth: KakaoAuth
+        @Body auth: KaKaoAuth
     ): Call<AuthSignResponse>
 
     // 유저 로그아웃

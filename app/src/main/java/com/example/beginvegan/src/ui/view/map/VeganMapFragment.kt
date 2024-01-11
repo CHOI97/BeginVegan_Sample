@@ -67,8 +67,7 @@ class VeganMapFragment : BaseFragment<FragmentVeganMapBinding>(
         super.onCreate(savedInstanceState)
         // case: Recommend restaurant click
         if (arguments != null) {
-            val d
-            ata = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 arguments?.getSerializable(RECOMMENDED_RESTAURANT, NearRestaurant::class.java)
             } else {
                 arguments?.getSerializable(RECOMMENDED_RESTAURANT) as? NearRestaurant

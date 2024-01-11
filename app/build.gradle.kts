@@ -1,7 +1,6 @@
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
 }
 
 android {
@@ -48,6 +47,10 @@ dependencies {
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
+    // Fragment viewModels()
+    implementation ("androidx.activity:activity-ktx:1.5.5")
+    implementation ("androidx.fragment:fragment-ktx:1.5.5")
+
     // Retrofit2
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -60,7 +63,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     // KAKAO MAP API
-//    implementation files("libs/libDaumMapAndroid.jar")
+    implementation (files("libs/libDaumMapAndroid.jar"))
 
     // KAKAO LOGIN API
     implementation ("com.kakao.sdk:v2-user:2.15.0") // 카카오 로그인
